@@ -452,5 +452,15 @@ public class BuildInfo {
       <artifactId>javax.servlet-api</artifactId>
       <version>${servlet.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.glassfish.corba</groupId>
+      <artifactId>glassfish-corba-omgapi</artifactId>
+      <version>${corba.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <version>${bind.version}</version>
+    </dependency>
   </dependencies>
 </project>

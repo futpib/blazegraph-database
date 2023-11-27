@@ -260,12 +260,12 @@ System.out.println("\n"+make(parts3));
 	  <pre>
 DoubleMatrix2D A = ascending(2,2);
 DoubleMatrix2D B = descending(2,2);
-DoubleMatrix2D _ = null;
+DoubleMatrix2D __ = null;
 
 DoubleMatrix2D[][] parts4 = 
 {
-&nbsp;&nbsp;&nbsp;{ A, _, A, _ },
-&nbsp;&nbsp;&nbsp;{ _, A, _, B }
+&nbsp;&nbsp;&nbsp;{ A, __, A, __ },
+&nbsp;&nbsp;&nbsp;{ __, A, __, B }
 };
 System.out.println("\n"+make(parts4));
 </pre>
@@ -416,15 +416,15 @@ Example:
 	<td> 
 	  <pre>
 DoubleMatrix2D matrix = ... ;
-DoubleMatrix2D _ = null;
+DoubleMatrix2D __ = null;
 DoubleMatrix2D A,B,C,D;
 A = make(2,2); B = make (4,4);
 C = make(4,3); D = make (2,2);
 DoubleMatrix2D[][] parts = 
 {
-&nbsp;&nbsp;&nbsp;{ _, A, _ },
-&nbsp;&nbsp;&nbsp;{ B, _, C },
-&nbsp;&nbsp;&nbsp;{ _, D, _ }
+&nbsp;&nbsp;&nbsp;{ __, A, __ },
+&nbsp;&nbsp;&nbsp;{ B, __, C },
+&nbsp;&nbsp;&nbsp;{ __, D, __ }
 };
 decompose(parts,matrix);
 System.out.println(&quot;\nA = &quot;+A);
@@ -562,12 +562,12 @@ System.out.println("\n"+compose(parts3));
 
 DoubleMatrix2D A = ascending(2,2);
 DoubleMatrix2D B = descending(2,2);
-DoubleMatrix2D _ = null;
+DoubleMatrix2D __ = null;
 
 DoubleMatrix2D[][] parts4 = 
 {
-	{ A, _, A, _ },
-	{ _, A, _, B }
+	{ A, __, A, __ },
+	{ __, A, __, B }
 };
 System.out.println("\n"+compose(parts4));
 //System.out.println("\n"+cern.colt.matrixpattern.Converting.toHTML(make(parts4).toString()));
@@ -580,13 +580,13 @@ public void demo2() {
 System.out.println("\n\n");
 DoubleMatrix2D matrix;
 DoubleMatrix2D A,B,C,D,E,F,G;
-DoubleMatrix2D _ = null;
+DoubleMatrix2D __ = null;
 A = make(2,2,1); B = make (4,4,2); C = make(4,3,3); D = make (2,2,4);
 DoubleMatrix2D[][] parts1 = 
 {
-	{ _, A, _ },
-	{ B, _, C },
-	{ _, D, _ }
+	{ __, A, __ },
+	{ B, __, C },
+	{ __, D, __ }
 };
 matrix = compose(parts1);
 System.out.println("\n"+matrix);
@@ -623,12 +623,12 @@ System.out.println("\n"+make(parts3));
 
 DoubleMatrix2D A = ascending(2,2);
 DoubleMatrix2D B = descending(2,2);
-DoubleMatrix2D _ = null;
+DoubleMatrix2D __ = null;
 
 DoubleMatrix2D[][] parts4 = 
 {
-	{ A, _, A, _ },
-	{ _, A, _, B }
+	{ A, __, A, __ },
+	{ __, A, __, B }
 };
 System.out.println("\n"+make(parts4));
 //System.out.println("\n"+cern.colt.matrixpattern.Converting.toHTML(make(parts4).toString()));

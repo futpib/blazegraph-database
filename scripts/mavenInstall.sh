@@ -1,6 +1,8 @@
 #!/bin/bash
 BASE_DIR=`dirname $0`
 
+set -xe
+
 #First install the parent POM.
 mvn -f "${BASE_DIR}"/../pom.xml clean install -DskipTests=true -N
 

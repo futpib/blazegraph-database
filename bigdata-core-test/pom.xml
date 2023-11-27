@@ -73,7 +73,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.6</version>
+        <version>3.3.0</version>
         <executions>
           <execution>
             <goals>
