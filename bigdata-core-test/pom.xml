@@ -234,7 +234,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.10</version>
+        <version>3.6.1</version>
         <executions>
           <execution>
             <id>copy</id>

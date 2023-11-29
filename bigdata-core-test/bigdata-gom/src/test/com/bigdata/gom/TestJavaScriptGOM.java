@@ -59,7 +59,7 @@ public class TestJavaScriptGOM extends TestCase2 {
 //
 //        }
         
-        jsEngine = mgr.getEngineByName("ECMAScript"); // or JavaScript
+        jsEngine = mgr.getEngineByName("js");
         
 //        �try {
 //        �} catch (ScriptException ex) {

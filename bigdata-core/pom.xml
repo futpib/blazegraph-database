@@ -462,5 +462,15 @@ public class BuildInfo {
       <artifactId>jakarta.xml.bind-api</artifactId>
       <version>${bind.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.graalvm.js</groupId>
+      <artifactId>js</artifactId>
+      <version>${js.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.graalvm.js</groupId>
+      <artifactId>js-scriptengine</artifactId>
+      <version>${js.version}</version>
+    </dependency>
   </dependencies>
 </project>

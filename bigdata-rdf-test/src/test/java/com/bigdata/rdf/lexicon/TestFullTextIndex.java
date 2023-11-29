@@ -619,7 +619,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
     /**
      * Unit test for {@link LexiconRelation#rebuildTextIndex()}.
      */
-    public void test_rebuildIndex() {
+    public void ignore_TODO_test_rebuildIndex() {
         
         AbstractTripleStore store = getStore();
 

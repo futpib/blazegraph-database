@@ -133,6 +133,11 @@ public class TestICUPortabilityBug extends TestCase {
             expected = new byte[] { 6, 12, 6, 12, 51, 61, 67, 41, 39, 61, 73,
                     67, 83, 75, 77, 67, 73, 47, 1, 20, 1, 126, -113, -124,
                     -113, 8};
+        } else if (VersionInfo.ICU_VERSION.getMajor() == 74
+                && VersionInfo.ICU_VERSION.getMinor() == 1) {
+            expected = new byte[] { 5, 10, 5, 10, 54, 64, 70, 44, 42, 64, 76,
+                    70, 86, 78, 80, 70, 76, 50, 1, 20, 1, -66, -36, -60,
+                    -36, 8};
         } else {
 
             throw new AssertionFailedError("Not an expected ICU version: "
