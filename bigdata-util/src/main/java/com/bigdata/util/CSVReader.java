@@ -39,6 +39,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
@@ -77,6 +78,8 @@ public class CSVReader implements Iterator<Map<String, Object>> {
      * The #of characters to buffer in the reader.
      */
     protected static final int BUF_SIZE = Bytes.kilobyte32 * 20;
+
+    protected static final Locale DEFAULT_LOCALE = Locale.forLanguageTag("en-US");
     
     /**
      * A header for a column that examines its values and interprets them as
@@ -141,11 +144,11 @@ public class CSVReader implements Iterator<Map<String, Object>> {
                     DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG),
                     DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL),
 
-                    NumberFormat.getCurrencyInstance(),
+                    NumberFormat.getCurrencyInstance(DEFAULT_LOCALE),
 
-                    NumberFormat.getPercentInstance(),
+                    NumberFormat.getPercentInstance(DEFAULT_LOCALE),
 
-                    NumberFormat.getNumberInstance(),
+                    NumberFormat.getNumberInstance(DEFAULT_LOCALE),
 
                     /*
                      * Note: There are no factory methods for formats that
@@ -160,7 +163,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
                     // engineering
                     new DecimalFormat("##0.#####E0"),
 
-                    NumberFormat.getIntegerInstance(),
+                    NumberFormat.getIntegerInstance(DEFAULT_LOCALE),
 
             };
 
