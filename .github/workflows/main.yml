@@ -1,0 +1,18 @@
+name: CI
+on:
+  - push
+  - pull_request
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - run: javac --version
+      - run: java -XshowSettings -version
+      - run: mvn install
+      - if: success() || failure()
+        uses: scacap/action-surefire-report@v1
