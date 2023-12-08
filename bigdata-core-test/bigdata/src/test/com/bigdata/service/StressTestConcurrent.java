@@ -52,7 +52,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Level;
-import org.junit.Ignore;
 
 import com.bigdata.btree.BTree;
 import com.bigdata.btree.IIndex;
@@ -241,7 +240,6 @@ public class StressTestConcurrent extends
      * 
      * @throws Exception
      */
-    @Ignore("TODO")
     public void test_stressTest2() throws Exception {
 
         int nclients = 10; // max concurrency limited by #of index partitions.
