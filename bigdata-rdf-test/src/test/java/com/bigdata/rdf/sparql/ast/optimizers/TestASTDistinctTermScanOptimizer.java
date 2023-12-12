@@ -27,8 +27,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.bigdata.rdf.sparql.ast.optimizers;
 
-import org.junit.Ignore;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -413,7 +411,6 @@ public class TestASTDistinctTermScanOptimizer extends AbstractOptimizerTestCase 
 		/**
 		 * SELECT DISTINCT ?s { graph :g {?s ?p ?o} }
 		 */
-		@Ignore("edge case, not implemented yet")
 		public void test_distinctTermScanOptimizer_bound_context() {
 
 			new Helper() {
