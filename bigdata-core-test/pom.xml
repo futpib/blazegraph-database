@@ -85,7 +85,7 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.18.1</version>
+        <version>${surefire.version}</version>
         <configuration>
           <!-- https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
           <useSystemClassLoader>false</useSystemClassLoader>
