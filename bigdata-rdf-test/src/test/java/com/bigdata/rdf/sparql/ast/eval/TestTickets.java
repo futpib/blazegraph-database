@@ -2367,7 +2367,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
    /**
     * BLZG-1748: Regressions in date comparison
     */
-   public void ignore_TODO_test_ticket_1748a() throws Exception {
+   public void test_ticket_1748a() throws Exception {
 
        new TestHelper(
            "ticket_bg1748a",// testURI,
@@ -2380,7 +2380,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
    /**
     * BLZG-1748: Regressions in date comparison
     */
-   public void ignore_TODO_test_ticket_1748b() throws Exception {
+   public void test_ticket_1748b() throws Exception {
 
        new TestHelper(
            "ticket_bg1748b",// testURI,

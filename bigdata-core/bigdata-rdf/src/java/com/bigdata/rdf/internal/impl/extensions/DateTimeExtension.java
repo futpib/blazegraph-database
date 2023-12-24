@@ -139,8 +139,19 @@ public class DateTimeExtension<V extends BigdataValue> implements IExtension<V> 
      * representation.
      */
     public static long getTimestamp(final String dateTime, final TimeZone defaultTZ) {
+
+        String fixedDateTime = dateTime;
         
-        final XMLGregorianCalendar c = XMLDatatypeUtil.parseCalendar(dateTime);
+        if (fixedDateTime.matches("^-\\d{1,3}-.+")) {
+            // This is a workaround for XMLDatatypeUtil.parseCalendar() expecting
+            // 4 digits for the year.
+            // A proper fix is to upgrade to a newer version of sesame (which
+            // has a newer version of Xerces) which may not have this problem.
+
+            fixedDateTime = fixedDateTime.replaceFirst("^-(\\d{1,3})-", "-000$1-");
+        }
+
+        final XMLGregorianCalendar c = XMLDatatypeUtil.parseCalendar(fixedDateTime);
         
         if (c.getTimezone() == DatatypeConstants.FIELD_UNDEFINED) {
             final GregorianCalendar gc = c.toGregorianCalendar();
