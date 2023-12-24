@@ -32,7 +32,7 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
-import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
+import com.bigdata.rdf.internal.QueryEvaluationUtil;
 
 import com.bigdata.bop.BOp;
 import com.bigdata.bop.IBindingSet;

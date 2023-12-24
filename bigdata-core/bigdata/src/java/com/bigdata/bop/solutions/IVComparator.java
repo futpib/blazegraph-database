@@ -41,7 +41,7 @@ import org.openrdf.model.URI;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.query.algebra.Compare.CompareOp;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
-import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
+import com.bigdata.rdf.internal.QueryEvaluationUtil;
 import org.openrdf.query.algebra.evaluation.util.ValueComparator;
 
 import com.bigdata.rdf.internal.IV;

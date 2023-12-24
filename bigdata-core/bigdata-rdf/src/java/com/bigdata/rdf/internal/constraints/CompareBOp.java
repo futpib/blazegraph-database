@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.Literal;
 import org.openrdf.query.algebra.Compare.CompareOp;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
-import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
+import com.bigdata.rdf.internal.QueryEvaluationUtil;
 
 import com.bigdata.bop.BOp;
 import com.bigdata.bop.IBindingSet;
