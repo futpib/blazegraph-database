@@ -37,6 +37,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
+import org.openrdf.IsolationLevel;
+import org.openrdf.IsolationLevels;
 import org.openrdf.model.Graph;
 import org.openrdf.model.Namespace;
 import org.openrdf.model.Resource;
@@ -803,6 +805,16 @@ public class BigdataSailRemoteRepositoryConnection implements RepositoryConnecti
 					throw new UnsupportedOperationException();
 				}
 
+            @Override
+            public int getMaxExecutionTime() {
+					throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void setMaxExecutionTime(int arg0) {
+					throw new UnsupportedOperationException();
+            }
+
 			};
 			
 		} catch (Exception ex) {
@@ -1015,7 +1027,7 @@ public class BigdataSailRemoteRepositoryConnection implements RepositoryConnecti
    }
 
    @Override
-   public void begin() throws RepositoryException {
+   public void begin(IsolationLevel isolationLevel) throws RepositoryException {
       assertOpen(); // non-blocking.
       synchronized (remoteTx) {
          assertOpen();
@@ -1029,6 +1041,11 @@ public class BigdataSailRemoteRepositoryConnection implements RepositoryConnecti
             throw new RepositoryException(e);
          }
       }
+   }
+
+   @Override
+   public void begin() throws RepositoryException {
+      begin(getIsolationLevel());
    }
 
    /**
@@ -1122,4 +1139,13 @@ public class BigdataSailRemoteRepositoryConnection implements RepositoryConnecti
       }
    }
 
+   @Override
+   public IsolationLevel getIsolationLevel() {
+      return IsolationLevels.READ_UNCOMMITTED;
+   }
+
+   @Override
+   public void setIsolationLevel(IsolationLevel arg0) throws IllegalStateException {
+      throw new UnsupportedOperationException();
+   }
 }

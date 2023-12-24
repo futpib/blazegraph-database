@@ -77,9 +77,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
-//FIXME:  Sesame 2.8 not used for 2.1.4 Release
-//import org.openrdf.IsolationLevel;
-//import org.openrdf.IsolationLevels;
+import org.openrdf.IsolationLevel;
+import org.openrdf.IsolationLevels;
 import org.openrdf.OpenRDFUtil;
 import org.openrdf.model.Namespace;
 import org.openrdf.model.Resource;
@@ -257,7 +256,7 @@ import info.aduna.iteration.CloseableIteration;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf
  */
-public class BigdataSail extends SailBase implements Sail {
+public class BigdataSail extends SailBase {
 
     private static final String ERR_OPENRDF_QUERY_MODEL = 
             "Support is no longer provided for UpdateExpr or TupleExpr evaluation. Please make sure you are using a BigdataSailRepository.  It will use the bigdata native evaluation model.";
@@ -4845,21 +4844,21 @@ public class BigdataSail extends SailBase implements Sail {
          * {@inheritDoc}
          */
         @Override
-        public void begin() throws SailException {
-            
-        }
+        public void begin(IsolationLevel arg0) throws UnknownSailTransactionStateException, SailException {
 
+            throw new SailException(ERR_OPENRDF_QUERY_MODEL);
+        }
+        
         /**
          * NOP.
          * <p>
          * {@inheritDoc}
          */
-//FIXME:  Sesame 2.8 not used for 2.1.4 Release
-//		@Override
-//		public void begin(IsolationLevel level)
-//				throws UnknownSailTransactionStateException, SailException {
-//
-//		}
+        @Override
+        public void begin() throws UnknownSailTransactionStateException, SailException {
+
+            begin(getDefaultIsolationLevel());
+        }
 
         /**
 		 * Always returns <code>true</code>.
@@ -5426,15 +5425,14 @@ public class BigdataSail extends SailBase implements Sail {
 
     } // class BigdataSailReadOnlyConnection
 
-//FIXME:  Sesame 2.8 not used for 2.1.4 Release
-//	@Override
-//	public List<IsolationLevel> getSupportedIsolationLevels() {
-//		return Arrays.<IsolationLevel>asList(IsolationLevels.READ_UNCOMMITTED, IsolationLevels.SNAPSHOT_READ);
-//	}
+    @Override
+    public List<IsolationLevel> getSupportedIsolationLevels() {
+        return Arrays.<IsolationLevel>asList(IsolationLevels.READ_UNCOMMITTED, IsolationLevels.SNAPSHOT_READ);
+    }
 
-//	@Override
-//	public IsolationLevel getDefaultIsolationLevel() {
-//		return IsolationLevels.READ_UNCOMMITTED;
-//	}
+    @Override
+    public IsolationLevel getDefaultIsolationLevel() {
+        return IsolationLevels.READ_UNCOMMITTED;
+    }
     
 }
