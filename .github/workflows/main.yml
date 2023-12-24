@@ -13,6 +13,7 @@ jobs:
           java-version: '21'
       - run: javac --version
       - run: java -XshowSettings -version
+      - run: mvn install -DskipTests=true
       - run: mvn install
       - if: success() || failure()
         uses: scacap/action-surefire-report@v1
