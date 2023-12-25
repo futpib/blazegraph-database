@@ -232,7 +232,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <rexster.version>2.5.0</rexster.version>
     <striterator.version>1.0</striterator.version>
     <junit-ext.version>${project.version}</junit-ext.version>
-    <junit4.version>4.11</junit4.version>
+    <junit4.version>4.13.2</junit4.version>
     <corba.version>4.2.5</corba.version>
     <bind.version>4.0.1</bind.version>
     <activation.version>2.1.2</activation.version>
