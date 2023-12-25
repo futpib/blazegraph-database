@@ -68,7 +68,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
         
     }
     
-    public void ignore_TODO_testRegex() throws Exception {
+    public void testRegex() throws Exception {
         
       final BigdataSail sail = getSail();
       try {
@@ -150,7 +150,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
 
     }
     
-    public void ignore_TODO_testStr() throws Exception {
+    public void testStr() throws Exception {
         
         final BigdataSail sail = getSail();
         try {
@@ -235,7 +235,7 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
 
       }
       
-    public void ignore_TODO_testXsdStr() throws Exception {
+    public void testXsdStr() throws Exception {
         
         final BigdataSail sail = getSail();
         try {

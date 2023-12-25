@@ -112,7 +112,7 @@ public class TestOptionals extends QuadsTestCase {
      * 
      * @throws Exception 
      */
-    public void ignore_TODO_testLeftJoins() throws Exception {
+    public void testLeftJoins() throws Exception {
 
         final BigdataSail sail = getSail();
         sail.initialize();

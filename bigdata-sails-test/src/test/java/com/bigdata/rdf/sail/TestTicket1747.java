@@ -61,7 +61,7 @@ public class TestTicket1747 extends QuadsTestCase {
 		super(arg0);
 	}
 
-	public void ignore_TODO_testBug() throws Exception {
+	public void testBug() throws Exception {
 
 //		Setup a triple store using a vocabulary that declares xsd:dateTime (this should be in the default vocabulary).
 		

@@ -91,7 +91,7 @@ public class TestTicket1755 extends QuadsTestCase {
 		super(arg0);
 	}
 
-	public void ignore_TODO_testBug() throws Exception {
+	public void testBug() throws Exception {
 
 		final BigdataSail sail = getSail();
 		try {

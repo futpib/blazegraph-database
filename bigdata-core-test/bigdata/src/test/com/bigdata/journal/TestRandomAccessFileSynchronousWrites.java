@@ -90,7 +90,7 @@ public class TestRandomAccessFileSynchronousWrites extends TestCase {
      * Test verifies whether or not the platform appears to perform synchronous
      * IOs when creating a {@link RandomAccessFile} with mode <code>rws</code>.
      */
-    public void ignore_TODO_test_syncWrites_rds() throws IOException {
+    public void test_syncWrites_rds() throws IOException {
 
         // Performance comparison when NOT requesting synchronous IO.
         final Stats rw = doSyncWriteTest("rw");
@@ -105,7 +105,7 @@ public class TestRandomAccessFileSynchronousWrites extends TestCase {
      * Test verifies whether or not the platform appears to perform synchronous
      * IOs when creating a {@link RandomAccessFile} with mode <code>rws</code>.
      */
-    public void ignore_TODO_test_syncWrites_rdd() throws IOException {
+    public void test_syncWrites_rdd() throws IOException {
 
         // Performance comparison when NOT requesting synchronous IO.
         final Stats rw = doSyncWriteTest("rw");

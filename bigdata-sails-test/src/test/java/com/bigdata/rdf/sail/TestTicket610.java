@@ -69,7 +69,7 @@ public class TestTicket610 extends ProxyBigdataSailTestCase {
         super(arg0);
     }
     
-    public void ignore_TODO_testBug() throws Exception {
+    public void testBug() throws Exception {
     	
         final URI a = new URIImpl(":a");
         final URI b = new URIImpl(":b");
