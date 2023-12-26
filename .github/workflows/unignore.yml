@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  test:
+  unignore-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,3 +19,5 @@ jobs:
       - run: mvn install
       - if: success() || failure()
         uses: scacap/action-surefire-report@v1
+        with:
+          check_name: 'Test Report with all ignored tests'

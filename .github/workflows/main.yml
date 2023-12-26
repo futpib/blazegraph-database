@@ -17,3 +17,5 @@ jobs:
       - run: mvn install
       - if: success() || failure()
         uses: scacap/action-surefire-report@v1
+        with:
+          check_name: 'Test Report'
