@@ -57,8 +57,6 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire.version}</version>
         <configuration>
-          <!-- https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
-          <useSystemClassLoader>false</useSystemClassLoader>
           <includes>
             <include>com/bigdata/rdf/TestAll.java</include>
             <include>com/bigdata/rdf/internal/gis/TestAll.java</include>

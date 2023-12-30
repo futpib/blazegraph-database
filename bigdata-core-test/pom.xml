@@ -87,8 +87,6 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire.version}</version>
         <configuration>
-          <!-- https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
-          <useSystemClassLoader>false</useSystemClassLoader>
           <includes>
             <include>com/bigdata/cache/lru/TestAll.java</include>
             <include>com/bigdata/io/TestAll.java</include>
