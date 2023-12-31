@@ -169,7 +169,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility implemen
     
     @Override
     public long acceptAndOutputSolutions(
-          final UnsyncLocalOutputBuffer<IBindingSet> out,
+          final UnsyncLocalOutputBuffer<IBindingSet> outputBuffer,
           final ICloseableIterator<IBindingSet[]> itr, final NamedSolutionSetStats stats,
           final IConstraint[] joinConstraints, final PipelineOp subquery,
           final IBindingSet[] bsFromBindingsSetSource, 
@@ -323,7 +323,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility implemen
         if (!dontRequireSubqueryEvaluation.isEmpty()) {
             // compute join for the fast path.
             hashJoinAndEmit(dontRequireSubqueryEvaluation.toArray(
-               new IBindingSet[0]), stats, out, joinConstraints, askVar);
+               new IBindingSet[0]), stats, outputBuffer, joinConstraints, askVar);
         }
 
         if (distinctProjectionBuffer.isEmpty()) {
@@ -471,7 +471,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility implemen
 
         // hash index join for the subquery path.
         hashJoinAndEmit(incomingBindingsBuffer.toArray(
-            new IBindingSet[0]), stats, out, joinConstraints, askVar);
+            new IBindingSet[0]), stats, outputBuffer, joinConstraints, askVar);
 
         // finally, we need to clear the buffers to avoid results being
         // processed multiple times

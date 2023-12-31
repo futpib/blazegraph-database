@@ -70,7 +70,8 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
           <printSummary>false</printSummary>
           <disableXmlReport>false</disableXmlReport>
           <argLine>-server -ea -Xms512m -Xmx4g -Dlog4j.configuration=file:src/test/resources/log4j.properties</argLine>
-          <rerunFailingTestsCount>2</rerunFailingTestsCount>
+          <!-- <rerunFailingTestsCount>2</rerunFailingTestsCount> -->
+          <!-- <redirectTestOutputToFile>true</redirectTestOutputToFile> -->
         </configuration>
       </plugin>
       <plugin>

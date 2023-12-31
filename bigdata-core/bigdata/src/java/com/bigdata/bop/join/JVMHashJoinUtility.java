@@ -331,17 +331,18 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
         final IVariable<?>[] keyVars = filter ? (IVariable<?>[]) op
                 .getProperty(JoinAnnotations.SELECT) : joinVars;
                 
-        rightSolutionsRef.set(//
-            new JVMHashIndex(//
-                keyVars,//
-                indexSolutionsHavingUnboundJoinVars,//
-                new LinkedHashMap<Key, Bucket>(op.getProperty(
-                    HashMapAnnotations.INITIAL_CAPACITY,
-                    HashMapAnnotations.DEFAULT_INITIAL_CAPACITY),//
-                    op.getProperty(HashMapAnnotations.LOAD_FACTOR,
-                    HashMapAnnotations.DEFAULT_LOAD_FACTOR)//
-                )//
-        ));
+        JVMHashIndex emptyRightSolutions = new JVMHashIndex(//
+            keyVars,//
+            indexSolutionsHavingUnboundJoinVars,//
+            new LinkedHashMap<Key, Bucket>(op.getProperty(
+                HashMapAnnotations.INITIAL_CAPACITY,
+                HashMapAnnotations.DEFAULT_INITIAL_CAPACITY),//
+                op.getProperty(HashMapAnnotations.LOAD_FACTOR,
+                HashMapAnnotations.DEFAULT_LOAD_FACTOR)//
+            )//
+        );
+
+        rightSolutionsRef.set(emptyRightSolutions);
     }
     
     @Override
@@ -424,7 +425,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
         try {
 
-            final JVMHashIndex index = getRightSolutions();
+            final JVMHashIndex rightSolutions = getRightSolutions();
 
             final IBindingSet[] all = BOpUtility.toArray(itr, stats);
 
@@ -435,7 +436,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
             for (IBindingSet bset : all) {
 
-                if (index.add(bset) == null) {
+                if (rightSolutions.add(bset) == null) {
 
                     continue;
 
@@ -446,7 +447,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
             }
 
             if (log.isDebugEnabled())
-                log.debug("There are " + index.bucketCount()
+                log.debug("There are " + rightSolutions.bucketCount()
                         + " hash buckets, joinVars="
                         + Arrays.toString(joinVars));
 
@@ -473,7 +474,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
         
         try {
         
-            final JVMHashIndex index = getRightSolutions();
+            final JVMHashIndex rightSolutions = getRightSolutions();
 
             final IBindingSet[] all = BOpUtility.toArray(itr, stats);
 
@@ -496,7 +497,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
                  * computing the hash code. Specifying optional:=true here
                  * causes makeKey() to have this behavior.
                  */
-                if (index.addDistinct(bset)) {
+                if (rightSolutions.addDistinct(bset)) {
 
                     // Write on the output sink.
                     sink.add(bset);
@@ -506,7 +507,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
             }
 
             if (log.isDebugEnabled())
-                log.debug("There are " + index.bucketCount()
+                log.debug("There are " + rightSolutions.bucketCount()
                         + " hash buckets, joinVars="
                         + Arrays.toString(joinVars));
 
@@ -715,8 +716,9 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     protected void outputSolution(final IBuffer<IBindingSet> outputBuffer,
             final IBindingSet outSolution) {
 
-        if (log.isDebugEnabled())
+        if (log.isDebugEnabled()) {
             log.debug("Output solution: " + outSolution);
+        }
 
         // Accept this binding set.
         outputBuffer.add(outSolution);

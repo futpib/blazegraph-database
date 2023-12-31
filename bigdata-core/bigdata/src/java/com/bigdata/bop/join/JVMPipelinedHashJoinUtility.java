@@ -150,7 +150,7 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
     
     @Override
     public long acceptAndOutputSolutions(
-          final UnsyncLocalOutputBuffer<IBindingSet> out,
+          final UnsyncLocalOutputBuffer<IBindingSet> outputBuffer,
           final ICloseableIterator<IBindingSet[]> itr, final NamedSolutionSetStats stats,
           final IConstraint[] joinConstraints, final PipelineOp subquery,
           final IBindingSet[] bsFromBindingsSetSource, 
@@ -208,9 +208,9 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
                  * (bucket of solutions with the same join vars from the
                  *  subquery - basically a JOIN).
                  */
-                final Bucket b = rightSolutions.getBucket(bsetDistinct);
+                final Bucket bucket = rightSolutions.getBucket(bsetDistinct);
 
-                if (b != null && b.contains(bsetDistinct)) {
+                if (bucket != null && bucket.contains(bsetDistinct)) {
 
                     /**
                      * If the hash index contains already contains the solution, this means that we evaluated
@@ -261,10 +261,11 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
         if (!dontRequireSubqueryEvaluation.isEmpty()) {
             // compute join for the fast path.
             hashJoinAndEmit(dontRequireSubqueryEvaluation.toArray(
-               new IBindingSet[0]), stats, out, joinConstraints, askVar);
+               new IBindingSet[0]), stats, outputBuffer, joinConstraints, askVar);
         }
 
-        if (distinctProjectionBuffer.isEmpty()) {
+        boolean isDistinctProjectionBufferEmpty = distinctProjectionBuffer.isEmpty();
+        if (isDistinctProjectionBufferEmpty) {
             // Nothing to do on the slow code path.
             return naccepted;
         }
@@ -272,9 +273,10 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
         // If this is not the last invocation and the buffer thresholds are not
         // yet exceeded, we wait for more incoming solutions, to benefit from
         // batch processing
-        if (!isLastInvocation && !thresholdExceeded(
-              distinctProjectionBuffer, distinctProjectionBufferThreshold,
-              incomingBindingsBuffer, incomingBindingsBufferThreshold)) {
+        boolean isThresholdExceeded = thresholdExceeded(
+            distinctProjectionBuffer, distinctProjectionBufferThreshold,
+            incomingBindingsBuffer, incomingBindingsBufferThreshold);
+        if (!isLastInvocation && !isThresholdExceeded) {
             return naccepted;         
         }
 
@@ -311,7 +313,7 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
                     for (IBindingSet solution : solutions) {
 
                         // add solutions to the subquery into the hash index.
-                        rightSolutions.add(solution);
+                        rightSolutions.addDistinct(solution);
 
                         /*
                          * we remove all mappings that generated at least one
@@ -374,7 +376,7 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
 
         // hash index join for the subquery path.
         hashJoinAndEmit(incomingBindingsBuffer.toArray(
-            new IBindingSet[0]), stats, out, joinConstraints, askVar);
+            new IBindingSet[0]), stats, outputBuffer, joinConstraints, askVar);
 
         // finally, we need to clear the buffers to avoid results being
         // processed multiple times
@@ -518,7 +520,7 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
            case Optional:
            case NotExists:
               if (!matchExists) {     
-                 outputSolution(outputBuffer, left);
+                outputSolution(outputBuffer, left);
               }
               break;
            /**
@@ -533,7 +535,7 @@ public class JVMPipelinedHashJoinUtility extends JVMHashJoinUtility implements P
                  left.set(
                     askVar, 
                     new Constant<XSDBooleanIV<?>>(XSDBooleanIV.valueOf(matchExists)));
-                outputSolution(outputBuffer, left);
+                    outputSolution(outputBuffer, left);
               }
               break;
            }

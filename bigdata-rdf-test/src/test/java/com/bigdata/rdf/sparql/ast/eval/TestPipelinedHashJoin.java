@@ -882,6 +882,23 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
         assertPipelinedPlanOrNot(queryPlan, astContainer, true, false);
 
     }
+
+    /**
+     * The above {@link #testPipelinedHashIncomingBindingsBufferThreshold} test was once flaky
+     * with results depending on where the chunk boundary landed. It would pass when everything
+     * is processed in one batch and fail if there happen to be two batches. To be more sure that
+     * it is fixed this test is run multiple times
+     */
+    public void testPipelinedHashIncomingBindingsBufferThresholdRepeated() throws Exception {
+        for (int i = 0; i < 10; i++) {
+            final ASTContainer astContainer = new TestHelper(
+                "pipelined-hashjoin-threshold-incoming-bindings-buffer",// testURI
+                "pipelined-hashjoin-threshold-incoming-bindings-buffer.rq", // queryURI
+                "pipelined-hashjoin-threshold.trig", // dataURI
+                "pipelined-hashjoin-threshold-incoming-bindings-buffer.srx" // resultURI
+            ).runTest();
+        }
+    }
     
     /**
      * Test query affected by 

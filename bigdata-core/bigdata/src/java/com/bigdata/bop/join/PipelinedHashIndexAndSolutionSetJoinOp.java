@@ -91,14 +91,14 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  *    
  *    { 
  *      { ?s -> <http://s1> , ?o1 -> <http://o11> },
- *      { ?s -> <http://s2> , ?o1 -> <http://o21> } 
- *      { ?s -> <http://s1> , ?o1 -> <http://o11b> }      
+ *      { ?s -> <http://s2> , ?o1 -> <http://o21> },
+ *      { ?s -> <http://s1> , ?o1 -> <http://o11b> }
  *    }
  *    
  *    coming in. For the sake of this example, assume the solutions are dropping
- *    in one after the after (chunk size=1) s.t. we have three iterations,
+ *    in one by one (chunk size=1) such that we have three iterations,
  *    but note that the implementation implements a generalized, vectored
- *    approach processing the input chunk by chunk..
+ *    approach processing the input chunk by chunk.
  *    
  *  2. The join variable set is { ?s }. We compute the distinct projection over
  *     ?s on the incoming bindings:
@@ -163,8 +163,9 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  *  unseen distinct projections and their associated incoming mappings in two
  *  buffers, namely the distinctProjectionBuffer and the incomingBindingssBuffer. 
  *  
- *  Buffer size is controlled via annotations: 
- *  incomingBindingssBufferThreshold and the Annotations.DISTINCT_PROJECTION_BUFFER_THRESHOLD. 
+ *  Buffer size is controlled via annotations:
+ *  {@link ChunkTask#incomingBindingsBufferThreshold}
+ *  and the Annotations.DISTINCT_PROJECTION_BUFFER_THRESHOLD.
  *  If, after processing a chunk, one of these thresholds is exceeded for the
  *  respective buffer (or, alternatively, if we're in the lastPass), the
  *  mappings in the distinctProjectionBuffer are provided as input to
