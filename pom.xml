@@ -239,6 +239,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <js.version>23.0.2</js.version>
     <birt.version>56.1.0.v201601250100</birt.version>
     <surefire.version>3.2.3</surefire.version>
+    <antrun.version>3.1.0</antrun.version>
     <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

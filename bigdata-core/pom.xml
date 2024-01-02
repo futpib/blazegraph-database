@@ -102,7 +102,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     <plugins>
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.6</version>
+        <version>${antrun.version}</version>
         <executions>
           <execution>
             <id>build-info</id>
@@ -118,15 +118,10 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                   <format property="build.timestamp" pattern="yyyy/MM/dd HH:mm:ss z" locale="en,US"/>
                 </tstamp>
                 <property environment="env"/>
-                <loadfile property="git.branch" srcFile="../.git/HEAD">
-                  <filterchain>
-                    <linecontainsregexp>
-                      <regexp pattern="^ref: (.*)$"/>
-                    </linecontainsregexp>
-                    <replaceregex pattern="^ref: (.*)$" replace="\1"/>
-                    <striplinebreaks/>
-                  </filterchain>
-                </loadfile>
+                <exec executable="git" outputproperty="git.branch">
+                  <arg value="branch"/>
+                  <arg value="--show-current"/>
+                </exec>
                 <!-- See BLZG-1688 -->
                 <!-- /usr/bin/git must be in the path -->
                 <exec executable="git" outputproperty="git.commit">

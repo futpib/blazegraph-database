@@ -112,7 +112,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
       </plugin>
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.6</version>
+        <version>${antrun.version}</version>
         <executions>
           <execution>
             <id>unpack-war</id>
