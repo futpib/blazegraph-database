@@ -64,7 +64,9 @@ import com.bigdata.btree.keys.IKeyBuilderFactory;
 import com.bigdata.btree.keys.KeyBuilder;
 import com.bigdata.btree.keys.StrengthEnum;
 import com.bigdata.btree.raba.codec.EmptyRabaValueCoder;
+import com.bigdata.cache.ConcurrentWeakValueCacheNoop;
 import com.bigdata.cache.ConcurrentWeakValueCacheWithTimeout;
+import com.bigdata.cache.IConcurrentWeakValueCache;
 import com.bigdata.journal.IIndexManager;
 import com.bigdata.journal.IResourceLock;
 import com.bigdata.journal.ITx;
@@ -361,6 +363,8 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
         * We keep a small hit cache based on search parameters: search string +
         * prefixMatch + matchAllTerms.  This defines the size of that cache.
         * The value should remain small.
+        *
+        * Zero value will disable the cache.
         */
         String HIT_CACHE_SIZE = FullTextIndex.class.getName()
         		+ ".hitCacheSize";
@@ -440,7 +444,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     /**
      * See {@link Options#HIT_CACHE_SIZE}.
      */
-    private final ConcurrentWeakValueCacheWithTimeout<FullTextQuery, Hit<V>[]> cache;
+    private final IConcurrentWeakValueCache<FullTextQuery, Hit<V>[]> cache;
 
 //    /**
 //     * @see Options#DOCID_FACTORY_CLASS
@@ -564,9 +568,11 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
         }
 
-        this.cache =
-               new ConcurrentWeakValueCacheWithTimeout<FullTextQuery, Hit<V>[]>(
-                               hitCacheSize, hitCacheTimeoutMillis);
+        this.cache = (
+            hitCacheSize == 0 
+                ? new ConcurrentWeakValueCacheNoop<FullTextQuery, Hit<V>[]>()
+                : new ConcurrentWeakValueCacheWithTimeout<FullTextQuery, Hit<V>[]>(hitCacheSize, hitCacheTimeoutMillis)
+        );
 
         {
 

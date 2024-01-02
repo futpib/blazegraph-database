@@ -61,6 +61,7 @@ import com.bigdata.rdf.store.AbstractTripleStoreTestCase;
 import com.bigdata.rdf.store.BigdataValueIteratorImpl;
 import com.bigdata.rdf.util.DumpLexicon;
 import com.bigdata.rdf.vocab.NoVocabulary;
+import com.bigdata.search.FullTextIndex;
 import com.bigdata.search.Hit;
 import com.bigdata.search.Hiterator;
 import com.bigdata.striterator.ChunkedWrappedIterator;
@@ -615,9 +616,19 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
     /**
      * Unit test for {@link LexiconRelation#rebuildTextIndex()}.
      */
-    public void ignore_TODO_test_rebuildIndex() {
-        
+    public void test_rebuildIndex() {
+
         AbstractTripleStore store = getStore();
+
+        // If store is not stable, reloading it with `commit` and `reopenStore` is not possible,
+        // so we disable cache instead.
+        if (!store.isStable()) {
+            final Properties properties = getProperties();
+
+            properties.setProperty(FullTextIndex.Options.HIT_CACHE_SIZE, "0");
+        
+            store = getStore(properties);
+        }
 
         try {
 
