@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -xe
+
 BASE_DIR=`dirname $0`
 
 echo "Building dependencies..."

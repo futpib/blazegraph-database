@@ -118,17 +118,17 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
                   <format property="build.timestamp" pattern="yyyy/MM/dd HH:mm:ss z" locale="en,US"/>
                 </tstamp>
                 <property environment="env"/>
-                <exec executable="git" outputproperty="git.branch">
+                <exec executable="git" outputproperty="git.branch" failifexecutionfails="false">
                   <arg value="branch"/>
                   <arg value="--show-current"/>
                 </exec>
-                <!-- See BLZG-1688 -->
-                <!-- /usr/bin/git must be in the path -->
-                <exec executable="git" outputproperty="git.commit">
+                <property name="git.branch" value="${env.GIT_BRANCH}"/>
+                <exec executable="git" outputproperty="git.commit" failifexecutionfails="false">
                   <arg value="rev-parse"/>
                   <arg value="--verify"/>
                   <arg value="HEAD"/>
                 </exec>
+                <property name="git.commit" value="${env.GIT_COMMIT}"/>
                 <echo file="${buildinfo.file}">
 package com.bigdata;
 public class BuildInfo {
