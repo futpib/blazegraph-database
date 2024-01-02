@@ -76,7 +76,7 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
         
     }
 
-    public void ignore_TODO_test_query() throws Exception {
+    public void test_query() throws Exception {
 
         final BigdataSail sail = getSail();
         
@@ -221,6 +221,17 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
     //                new ProjectionElemList(new ProjectionElem[] { new ProjectionElem( "Y" )}));
     
     //            final String q = "select ?Y where { ?SID <"+dcCreator+"> ?Y . graph ?SID { <"+y+"> <"+RDF.TYPE+"> <"+B+"> . } }";
+
+                /*
+                    PREFIX bd:  <http://bigdata.com/RDF#>
+                    PREFIX dc:  <http://purl.org/dc/terms/>
+                    PREFIX foo: <http://www.foo.org/>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+                    SELECT ?Y WHERE {
+                        <<foo:y rdf:type foo:B>> dc:creator ?Y .
+                    }
+                 */
                 final String q = "select ?Y where { <<<"+y+"> <"+RDF.TYPE+"> <"+B+">>> <"+dcCreator+"> ?Y . }";
                 
                 /*
@@ -247,11 +258,11 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
                  * These are the expected results for the query (the bindings for Y).
                  */
     
-                final Set<Value> expected = new HashSet<Value>();
+                final Set<String> expected = new HashSet<String>();
     
-                expected.add(bryan);
+                expected.add(bryan.toString());
                 
-                expected.add(mike);
+                expected.add(mike.toString());
     
                 /*
                  * Verify that the query results is the correct solutions.
@@ -271,9 +282,11 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
                             log.info("solution[" + i + "] : " + solution);
     
                         final Value actual = solution.getValue("Y");
+                        final String actualString = actual.toString();
     
-                        assertTrue("Not expecting Y=" + actual, expected
-                                .remove(actual));
+                        assertTrue("Not expecting Y=" + actual, expected.contains(actualString));
+
+                        expected.remove(actualString);
     
                         i++;
     
@@ -301,6 +314,4 @@ public class TestProvenanceQuery extends ProxyBigdataSailTestCase {
         
     }
 
-    public void testNoop() throws Exception {
-    }
 }
