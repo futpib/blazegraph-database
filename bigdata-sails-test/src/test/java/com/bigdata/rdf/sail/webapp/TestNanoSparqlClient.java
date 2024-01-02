@@ -1070,14 +1070,13 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //	// }
 //	
 //
-    public void ignore_TODO_testServiceNodeBindings() throws Exception {
+    public void testServiceNodeBindings() throws Exception {
         final BigdataSailRemoteRepository repo = m_repo.getBigdataSailRemoteRepository();
         final BigdataSailRemoteRepositoryConnection cxn = 
             (BigdataSailRemoteRepositoryConnection) repo.getConnection();
         
         try {
-          String queryStr = "select * where {SERVICE <http://DBpedia.org/sparql> { <http://dbpedia.org/resource/Tonga_(Nyasa)_language> rdfs:label ?langLabel. }}";
-//                String queryStr = "SELECT * WHERE { BIND (<http://dbpedia.org/resource/Tonga_(Nyasa)_language> AS ?ref) . SERVICE <http://DBpedia.org/sparql> { ?ref rdfs:label ?langLabel. } }";
+            String queryStr = "select * where { SERVICE <https://query.wikidata.org/sparql> { <http://www.wikidata.org/entity/Q23> <http://www.wikidata.org/prop/P3373> ?sibling. } }";
             final org.openrdf.query.TupleQuery tq = cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
             final TupleQueryResult tqr = tq.evaluate();
             try {
@@ -1086,15 +1085,12 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
                     tqr.next();
                     cnt++;
                 }
-                assertEquals(cnt, 2);
+                assertEquals(cnt, 9);
             } finally {
                 tqr.close();
             }
         } finally {
             cxn.close();
         }
-    }
-
-    public void testNoop() throws Exception {
     }
 }
