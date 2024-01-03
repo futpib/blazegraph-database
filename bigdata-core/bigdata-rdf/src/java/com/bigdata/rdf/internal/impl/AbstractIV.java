@@ -90,8 +90,8 @@ import com.bigdata.rdf.model.BigdataValue;
  * We currently have 14 built-in (or intrinsic) data types (see {@link DTE}).
  * Each of those types has a natural order which we can encode and decode from
  * the B+Tree key. In general, there is a relatively limited set of interesting
- * intrinsic codings, which is important since we will dedicate just 4 bits for
- * to code the natural order of the value space, which is just only 16
+ * intrinsic codings, which is important since we will dedicate just 4 bits
+ * to encode the natural order of the value space, which is only 16
  * distinctions. Given that we have 14 intrinsic data types, that leaves room
  * for just two more. One of those bits provides for Unicode data (see
  * {@link DTE#XSDString} without a collation order). The other bit provides
@@ -103,7 +103,7 @@ import com.bigdata.rdf.model.BigdataValue;
  * <pre>
  * [valueType]    : 2 bits
  * [inline]       : 1 bit
- * [extension]   : 1 bit
+ * [extension]    : 1 bit
  * [dataTypeCode] : 4 bits
  * </pre>
  * 
@@ -194,7 +194,7 @@ import com.bigdata.rdf.model.BigdataValue;
  * enumeration is registered, the order in which the members of the enumeration
  * are given may optionally specify the natural order of that enumeration. The
  * natural order is imposed by projecting the first member of the enumeration
- * one ZERO, the second member onto ONE, etc. An enumeration with a natural
+ * onto ZERO, the second member onto ONE, etc. An enumeration with a natural
  * order will be sorted based on that defined order and query optimizations may
  * perform key-range scans informed by that natural order.<br/>
  * Enumerations may be used in cases where you might otherwise use short

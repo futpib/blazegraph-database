@@ -1,13 +1,68 @@
 <?xml version="1.0"?>
 <sparql
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xs="http://www.w3.org/2001/XMLSchema#"
-     xmlns="http://www.w3.org/2005/sparql-results#" >
-   <head>
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema#"
+    xmlns="http://www.w3.org/2005/sparql-results#" >
+  <head>
     <variable name="?s"/>
     <variable name="?p"/>
     <variable name="?o"/>
-   </head>
-   <results>
-   </results>
+  </head>
+  <results>
+    <result>
+      <binding name="s">
+        <triple>
+          <subject>
+            <uri>https://example.com/test#test/1</uri>
+          </subject>
+          <predicate>
+            <uri>https://example.com/test#foo</uri>
+          </predicate>
+          <object>
+            <literal datatype="http://www.w3.org/2001/XMLSchema#string">bar</literal>
+          </object>
+        </triple>
+      </binding>
+      <binding name="p">
+        <uri>https://futpib.github.io/tripler/meta#insertedAt</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-01T00:00:00.000Z</literal>
+      </binding>
+    </result>
+
+    <result>
+      <binding name="s">
+        <triple>
+          <subject>
+            <uri>https://example.com/test#test/1</uri>
+          </subject>
+          <predicate>
+            <uri>https://example.com/test#foo</uri>
+          </predicate>
+          <object>
+            <literal datatype="http://www.w3.org/2001/XMLSchema#string">bar</literal>
+          </object>
+        </triple>
+      </binding>
+      <binding name="p">
+        <uri>https://futpib.github.io/tripler/meta#insertedBy</uri>
+      </binding>
+      <binding name="o">
+        <uri>https://example.com/test#</uri>
+      </binding>
+    </result>
+
+    <result>
+      <binding name="s">
+        <uri>https://example.com/test#test/1</uri>
+      </binding>
+      <binding name="p">
+        <uri>https://example.com/test#foo</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#string">bar</literal>
+      </binding>
+    </result>
+  </results>
 </sparql>

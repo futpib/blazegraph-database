@@ -98,11 +98,6 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
 	 * The cached byte[] key for the encoding of this IV.
 	 */
 	private transient byte[] key;
-	
-	/**
-	 * The cached materialized BigdataValue for this sid.
-	 */
-	private transient V bnode;
 
 	@Override
     public IV<V, ISPO> clone(final boolean clearCache) {
@@ -113,8 +108,6 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
         tmp.key = key;
         
         // Propagate the cached BigdataValue.
-        tmp.bnode = bnode;
-        
         if (!clearCache) {
 
             tmp.setValue(getValueCache());
@@ -168,6 +161,8 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
     @SuppressWarnings("unchecked")
     @Override
     public V asValue(final LexiconRelation lex) {
+		V bnode = getValueCache();
+        
         if (bnode == null) {
 	        bnode = (V) lex.getValueFactory().createBNode(getID());
 	        bnode.setIV(this);
@@ -181,7 +176,10 @@ public class SidIV<V extends BigdataBNode> extends AbstractInlineIV<V, ISPO>
 	        		(BigdataURI) spo.p().asValue(lex), 
 	        		(BigdataValue) spo.o().asValue(lex), 
 	        		c));
+            
+			setValue(bnode);
         }
+
         return bnode;
     }
 
