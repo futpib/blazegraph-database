@@ -705,14 +705,14 @@ public class BigdataConnectionTest extends RepositoryConnectionTest {
          * be thrown out. We do this using a Sun specific management API. The
          * test will throw a ClassNotFoundException for other JVMs.
          */
-        final Class cls1 = Class
+        final Class garbageCollectorMXBeanClass = Class
                 .forName("com.sun.management.GarbageCollectorMXBean");
 
-        final Class cls2 = Class.forName("com.sun.management.GcInfo");
+        final Class gcInfoClass = Class.forName("com.sun.management.GcInfo");
 
-        final Method method1 = cls1.getMethod("getLastGcInfo", new Class[] {});
+        final Method getLastGcInfoMethod = garbageCollectorMXBeanClass.getMethod("getLastGcInfo", new Class[] {});
 
-        final Method method2 = cls2.getMethod("getDuration", new Class[] {});
+        final Method getDurationMethod = gcInfoClass.getMethod("getDuration", new Class[] {});
 
         /*
          * Load data.
@@ -786,12 +786,12 @@ public class BigdataConnectionTest extends RepositoryConnectionTest {
                          * pretty good proxy for that (as observed with
                          * -verbose:gc when you run this test).
                          */
-                        if (cls1.isAssignableFrom(m.getClass())) {
+                        if (garbageCollectorMXBeanClass.isAssignableFrom(m.getClass())) {
                             // Information from the last GC.
-                            final Object lastGcInfo = method1.invoke(m,
+                            final Object lastGcInfo = getLastGcInfoMethod.invoke(m,
                                     new Object[] {});
                             // Duration of that last GC.
-                            final long lastDuration = (Long) method2.invoke(
+                            final long lastDuration = (Long) getDurationMethod.invoke(
                                     lastGcInfo, new Object[] {});
                             if (lastDuration >= MAX_QUERY_TIME) {
                                 log.warn("Large GC pause caused artifical liveness problem: duration="

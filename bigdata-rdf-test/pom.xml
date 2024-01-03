@@ -128,6 +128,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
         <includes>
           <include>**/*.n3</include>
           <include>**/*.nt</include>
+          <include>**/*.ntx</include>
           <include>**/*.nq</include>
           <include>**/*.owl</include>
           <include>**/*.properties</include>
