@@ -26,7 +26,7 @@ package com.bigdata.rdf.internal;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import jakarta.xml.bind.DatatypeConverter;
+import javax.xml.bind.DatatypeConverter;
 
 import com.bigdata.rdf.internal.impl.literal.AbstractLiteralIV;
 import com.bigdata.rdf.internal.impl.literal.UUIDLiteralIV;
