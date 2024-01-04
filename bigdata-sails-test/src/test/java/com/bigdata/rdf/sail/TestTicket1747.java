@@ -151,7 +151,4 @@ public class TestTicket1747 extends QuadsTestCase {
 			}
 		}
 	}
-
-	public void testNoop() throws Exception {
-	}
 }

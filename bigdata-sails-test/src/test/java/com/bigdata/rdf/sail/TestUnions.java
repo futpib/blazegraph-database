@@ -293,7 +293,4 @@ public class TestUnions extends QuadsTestCase {
         }
 
     }
-
-    public void testNoop() throws Exception {
-    }
 }

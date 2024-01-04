@@ -127,7 +127,4 @@ public class TestTicket610 extends ProxyBigdataSailTestCase {
         }
     	
     }
-
-    public void testNoop() throws Exception {
-    }
 }

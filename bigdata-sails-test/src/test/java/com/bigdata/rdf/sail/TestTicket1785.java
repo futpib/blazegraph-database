@@ -142,7 +142,4 @@ public class TestTicket1785 extends QuadsTestCase {
 			repo.shutDown();
 		}
 	}
-
-	public void testNoop() throws Exception {
-	}
 }

@@ -181,7 +181,4 @@ public class TestBLZG1943 extends ProxyBigdataSailTestCase {
         return properties;
 
     }
-
-    public void testNoop() throws Exception {
-    }
 }

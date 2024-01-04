@@ -273,7 +273,4 @@ public class TestQuadsAPI extends QuadsTestCase {
         }
 
     }
-
-    public void testNoop() throws Exception {
-    }
 }

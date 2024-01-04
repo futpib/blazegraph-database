@@ -174,7 +174,4 @@ public class TestTicket2043b extends QuadsTestCase {
 		}
 		assertEquals(1, ivsCnt);
 	}
-
-	public void testNoop() throws Exception {
-	}
 }

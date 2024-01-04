@@ -84,8 +84,6 @@ public class TestRandomAccessFileSynchronousWrites extends TestCase {
         
     }
 
-    public void test_dummy() {}
-
     /**
      * Test verifies whether or not the platform appears to perform synchronous
      * IOs when creating a {@link RandomAccessFile} with mode <code>rws</code>.

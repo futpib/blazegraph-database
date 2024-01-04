@@ -206,7 +206,4 @@ public class TestTicket1755 extends QuadsTestCase {
 		}
 		return cnt;
 	}
-
-	public void testNoop() throws Exception {
-	}
 }

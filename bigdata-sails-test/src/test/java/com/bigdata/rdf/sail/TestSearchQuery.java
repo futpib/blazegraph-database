@@ -2648,7 +2648,4 @@ LIMIT 10 OFFSET 0
         }
         
     }
-
-    public void testNoop() throws Exception {
-    }
 }

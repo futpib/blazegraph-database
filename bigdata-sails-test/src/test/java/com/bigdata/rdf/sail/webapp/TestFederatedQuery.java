@@ -1008,7 +1008,4 @@ public class TestFederatedQuery<S extends IIndexManager> extends
             fail(message.toString());
         }
     }
-
-    public void testNoop() throws Exception {
-    }
 }

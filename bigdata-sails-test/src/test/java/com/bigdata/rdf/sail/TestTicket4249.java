@@ -196,7 +196,4 @@ public class TestTicket4249 extends QuadsTestCase {
 			tqr.close();
 		}
 	}
-
-	public void testNoop() throws Exception {
-	}
 }
