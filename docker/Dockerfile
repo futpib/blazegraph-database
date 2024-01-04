@@ -18,6 +18,18 @@ ENV JAVA_OPTS="-Xmx1g"
 WORKDIR /var/lib/jetty
 
 COPY --from=builder /usr/src/app/artifacts/blazegraph.war ./webapps/blazegraph.war
-COPY --from=builder /usr/src/app/bigdata-war-html/src/main/resources/RWStore.properties ./RWStore.properties
+COPY --from=builder /usr/src/app/docker/RWStore.properties ./RWStore.properties
+COPY --from=builder /usr/src/app/docker/entrypoint.sh ./entrypoint.sh
 
-CMD java $JAVA_OPTS -Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=/RWStore.properties -jar /usr/local/jetty/start.jar
+USER root
+
+RUN set -xe; \
+    mkdir /data; \
+    chown jetty:jetty /data; \
+    chmod a+rw /data;
+
+USER jetty
+
+VOLUME /data
+
+CMD ./entrypoint.sh

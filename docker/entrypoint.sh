@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -xe
+
 exec \
     java \
     $JAVA_OPTS \
