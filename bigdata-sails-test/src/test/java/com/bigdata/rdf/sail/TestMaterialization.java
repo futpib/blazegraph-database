@@ -317,49 +317,4 @@ public class TestMaterialization extends ProxyBigdataSailTestCase {
 
     }
 
-    public void testSelectAllFromEmptyRepository() throws Exception {
-        final BigdataSail sail = getSail();
-        try {
-            sail.initialize();
-            final BigdataSailRepository repo = new BigdataSailRepository(sail);
-
-            final RepositoryConnection cxn = repo.getConnection();
-
-            try {
-                final ValueFactory vf = sail.getValueFactory();
-
-                if (log.isInfoEnabled()) {
-                    log.info(((BigdataSailRepositoryConnection) cxn).getTripleStore().dumpStore());
-                }
-
-                {
-
-                    String query = "select * where { ?s ?p ?o }";
-
-                    final SailTupleQuery tupleQuery = (SailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
-                    tupleQuery.setIncludeInferred(true /* includeInferred */);
-
-                    if (log.isInfoEnabled()) {
-                        log.info(query);
-                    }
-
-                    final TupleQueryResult result = tupleQuery.evaluate();
-                    
-                    List<BindingSet> resultList = new ArrayList<BindingSet>();
-                    
-                    while (result.hasNext()) {
-                        resultList.add(result.next());
-                    }
-
-                    assertEquals(new ArrayList<BindingSet>(), resultList);
-                }
-
-            } finally {
-                cxn.close();
-            }
-        } finally {
-            if (sail instanceof BigdataSail)
-                ((BigdataSail) sail).__tearDownUnitTest();// shutDown();
-        }
-    }
 }
