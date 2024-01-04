@@ -31,7 +31,8 @@ import com.bigdata.rdf.model.BigdataStatement;
 /**
  * A TupleQueryResultWriter that writes query results in the <a
  * href="http://www.w3.org/TR/rdf-sparql-json-res/">SPARQL Query Results JSON
- * Format</a>.
+ * Format</a> with <a href="https://w3c.github.io/rdf-star/cg-spec/editors_draft.html#sparql-star-query-results-json-format">
+ * SPARQL-star Query Results JDON Format</a> extensions.
  */
 public class BigdataSPARQLResultsJSONWriter extends SPARQLJSONWriterBase implements TupleQueryResultWriter {
 
@@ -83,7 +84,7 @@ public class BigdataSPARQLResultsJSONWriter extends SPARQLJSONWriterBase impleme
         
         jg.writeStartObject();
 
-        jg.writeStringField("type", BigdataSPARQLResultsJSONParser.SID);
+        jg.writeStringField("type", BigdataSPARQLResultsJSONParser.TRIPLE);
         
         final BigdataStatement stmt = sid.getStatement();
         

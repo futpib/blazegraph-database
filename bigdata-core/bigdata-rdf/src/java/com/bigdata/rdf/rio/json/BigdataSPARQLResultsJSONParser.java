@@ -40,15 +40,17 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 
 /**
- * Parser for SPARQL-1.1 JSON Results Format documents
+ * Parser for SPARQL-1.1 JSON Results Format documents with SPARQL-star support.
  * 
  * @see <a href="http://www.w3.org/TR/sparql11-results-json/">SPARQL 1.1 Query
  *      Results JSON Format</a>
+ * @see <a href="https://w3c.github.io/rdf-star/cg-spec/editors_draft.html#sparql-star-query-results-json-format">
+ *      SPARQL-star Query Results JSON Format</a>
  * @author Peter Ansell
  */
 public class BigdataSPARQLResultsJSONParser extends SPARQLJSONParserBase implements TupleQueryResultParser {
 
-    public static final String SID = "sid";
+    public static final String TRIPLE = "triple";
 
     public static final String SUBJECT = "subject";
 
@@ -156,7 +158,7 @@ public class BigdataSPARQLResultsJSONParser extends SPARQLJSONParserBase impleme
         }
         
         // added for Sids support
-        if (type.equals(SID)) {
+        if (type.equals(TRIPLE)) {
             
             final Resource s = (Resource) sid.get(SUBJECT);
             final URI p = (URI) sid.get(PREDICATE);
