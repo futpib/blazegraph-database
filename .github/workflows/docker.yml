@@ -18,7 +18,7 @@ jobs:
           file: ./docker/Dockerfile
           build-args: |
             GIT_COMMIT=${{ github.sha }}
-            GIt_BRANCH=${{ github.ref_name }}
+            GIT_BRANCH=${{ github.ref_name }}
           push: true
           tags: futpib/blazegraph:latest
           username: ${{ secrets.DOCKERHUB_USERNAME }}
