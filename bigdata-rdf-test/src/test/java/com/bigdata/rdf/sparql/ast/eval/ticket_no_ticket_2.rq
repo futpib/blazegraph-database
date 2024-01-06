@@ -1,0 +1,6 @@
+SELECT * WHERE {
+    ?s <https://core.telegram.org/tdlib/docs#title> "ЛОМ \U0001f3f4‍☠\U0001f526 \U0001f1f7\U0001f1fa\U0001f3f3‍\U0001f308" .
+    OPTIONAL {
+        ?s <https://core.telegram.org/tdlib/docs#title> "\u20ac" .
+    }
+}

@@ -1,0 +1,6 @@
+SELECT * WHERE {
+    ?s <https://core.telegram.org/tdlib/docs#title> "ЛОМ 🏴‍☠🔦 🇷🇺🏳‍🌈" .
+    OPTIONAL {
+        ?s <https://core.telegram.org/tdlib/docs#title> "€" .
+    }
+}

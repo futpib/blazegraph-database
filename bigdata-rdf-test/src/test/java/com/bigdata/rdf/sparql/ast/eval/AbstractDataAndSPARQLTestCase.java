@@ -60,7 +60,10 @@ package com.bigdata.rdf.sparql.ast.eval;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
+import org.apache.commons.io.input.BOMInputStream;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
@@ -125,7 +128,7 @@ public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluatio
         /**
          * Load data from an input stream.
          * 
-         * @param is
+         * @param inputStream
          *            The stream (required).
          * @param format
          *            The format (required).
@@ -133,7 +136,7 @@ public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluatio
          *            The baseURL (required).
          * @return The #of triples read from the stream.
          */
-        long loadData(final InputStream is, final RDFFormat format,
+        long loadData(final InputStream inputStream, final RDFFormat format,
                 final String uri) {
 
             final RDFParser rdfParser = RDFParserRegistry.getInstance()
@@ -164,8 +167,9 @@ public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluatio
 
 
             try {
+                final Reader inputReader = new InputStreamReader(new BOMInputStream(inputStream, false), "UTF-8");
 
-                rdfParser.parse(is, baseURI);
+                rdfParser.parse(inputReader, baseURI);
 
                 return handler.close();
 
@@ -177,7 +181,7 @@ public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluatio
 
                 try {
 
-                    is.close();
+                    inputStream.close();
 
                 } catch (IOException e) {
 
