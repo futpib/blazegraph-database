@@ -87,6 +87,8 @@ public class BigdataSPARQLResultsJSONWriter extends SPARQLJSONWriterBase impleme
         jg.writeStringField("type", BigdataSPARQLResultsJSONParser.TRIPLE);
         
         final BigdataStatement stmt = sid.getStatement();
+
+        jg.writeObjectFieldStart("value");
         
         jg.writeFieldName(BigdataSPARQLResultsJSONParser.SUBJECT);
         writeValue(stmt.getSubject());
@@ -96,6 +98,8 @@ public class BigdataSPARQLResultsJSONWriter extends SPARQLJSONWriterBase impleme
         
         jg.writeFieldName(BigdataSPARQLResultsJSONParser.OBJECT);
         writeValue(stmt.getObject());
+
+        jg.writeEndObject();
 
         if (stmt.getContext() != null) {
             jg.writeFieldName(BigdataSPARQLResultsJSONParser.CONTEXT);
