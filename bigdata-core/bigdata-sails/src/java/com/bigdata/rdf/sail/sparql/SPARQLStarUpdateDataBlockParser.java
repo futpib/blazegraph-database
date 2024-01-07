@@ -142,18 +142,6 @@ public class SPARQLStarUpdateDataBlockParser extends SPARQLUpdateDataBlockParser
 			}
 
 			stmtBuf.append((char)c);
-
-			if (c == '\\') {
-				// This escapes the next character, which might be a '>'
-				c = readCodePoint();
-				if (c == -1) {
-					throwEOFException();
-				}
-				if (c != 'u' && c != 'U') {
-					reportFatalError("IRI includes string escapes: '\\" + c + "'");
-				}
-				stmtBuf.append((char)c);
-			}
 		}
 
 		// Use our own class in recursion.

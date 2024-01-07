@@ -1,7 +1,5 @@
 package com.bigdata.rdf.sparql.ast.eval;
 
-import junit.framework.AssertionFailedError;
-
 /**
  * 8-digit unicode escape sequences (\UXXXXXXXX) in SPARQL queries raised an error.
  * Also N-Triples parser treated it's input as US-ASCII resulting in 0xFF characters.
